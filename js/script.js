@@ -2,7 +2,8 @@
 // when user clicks anywhere on the button, the "printQuote" function is called
 document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 
-// declaring the array of objects containing the quotes along with sources and year
+// declaring the array of objects, each containing the at least a .quote along with its .source and  .tag
+// and some with additional properties like .citation and .year
 var quotes = [
     {quote: "War is a series of disasters which result in a winner.",
     source: "Georges Clemenceau",
@@ -33,7 +34,7 @@ var quotes = [
 
     {quote: "There are no secrets to success. It is the result of preparation, hard work, and learning from failure.",
     source: "Colin Powell",
-    tag: "work"}
+    tag: "work"},
 
     {quote: "War does not determine who is right — only who is left.",
     source: "Anonymous",
@@ -73,13 +74,13 @@ var quotes = [
     source: "Alvin Redman",
     citation: "The Epigrams of Oscar Wilde",
     year: 1952,
-    tag: "love"}
+    tag: "love"},
 
     {quote: "I hate war as only a soldier who has lived it can, only as one who has seen its brutality, its stupidity.",
     source: "Dwight D. Eisenhower",
     citation: "Speech in Ottawa",
     year: 1946,
-    tag: "war"},
+    tag: "war"}
 ];
 
 
@@ -87,6 +88,11 @@ var quotes = [
 function getRandomQuote() {
   var randomNumber = Math.floor(Math.random()*quotes.length);
   return quotes[randomNumber];
+}
+
+// declaring a function that generates a random value between 0 and 255
+function getRandomRGB () {
+  return (Math.floor(Math.random()*256));
 }
 
 // declaring the printQuote function that triggers every time the button is clicked
@@ -110,4 +116,6 @@ function printQuote () {
   // the resulting html string is printed in the 'quote-box' div inside the index.html.
   var quoteboxDiv = document.getElementById('quote-box');
   quoteboxDiv.innerHTML = html;
+  // the background-color is modified each time the button is pressed with random RGB values
+  document.body.style.backgroundColor = "rgba(" + getRandomRGB() + "," + getRandomRGB() + "," + getRandomRGB()+ ",0.9)";
 }
