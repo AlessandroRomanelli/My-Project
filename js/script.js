@@ -84,6 +84,8 @@ var quotes = [
 ];
 // declaring an empty array to hold the quotes that have already been used
 var usedQuotes = [];
+// declaring the interval variable to trigger the printQuote function ever 30secs.
+var intervalID = window.setInterval(printQuote, 30000)
 
 // declaring a function that picks a random quote
 function getRandomQuote() {
@@ -105,9 +107,10 @@ function getRandomQuote() {
   return outcome
 }
 
-// declaring a function that generates a random value between 0 and 255
+// declaring a function that generates a random value between 0 and 200 (higher values
+// are avoided to prevent the text from being unreadable)
 function getRandomRGB () {
-  return (Math.floor(Math.random()*256));
+  return (Math.floor(Math.random()*201));
 }
 
 // declaring the printQuote function that triggers every time the button is clicked
