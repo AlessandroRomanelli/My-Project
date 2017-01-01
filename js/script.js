@@ -82,12 +82,27 @@ var quotes = [
     year: 1946,
     tag: "war"}
 ];
+// declaring an empty array to hold the quotes that have already been used
+var usedQuotes = [];
 
-
-// declaring a function that generates a random number and returns a random object from within the quotes array
+// declaring a function that picks a random quote
 function getRandomQuote() {
+  // adding a variable with a random value between 0 and the number of quotes in the array
   var randomNumber = Math.floor(Math.random()*quotes.length);
-  return quotes[randomNumber];
+  // adding a conditional statement so that if the quotes array is empty and all the quotes
+  // have been displayed once, the array is reset to the initial condition.
+  if (quotes.length === 0) {
+    quotes = usedQuotes;
+    usedQuotes = [];
+  }
+  // adding the outcome variable to store the information before modifying the array
+  var outcome = quotes[randomNumber];
+  // using the splice method to remove the randomly selected object from the quotes array
+  quotes.splice(randomNumber, 1);
+  // using the push method to add the object to the already-used-quotes array
+  usedQuotes.push(outcome);
+  // returning the randomly selected object (quote)
+  return outcome
 }
 
 // declaring a function that generates a random value between 0 and 255
@@ -116,6 +131,10 @@ function printQuote () {
   // the resulting html string is printed in the 'quote-box' div inside the index.html.
   var quoteboxDiv = document.getElementById('quote-box');
   quoteboxDiv.innerHTML = html;
+  // logging to console to check if everything works properly
+  console.log(randomQuote.quote);
+  console.log(quotes.length);
+  console.log(usedQuotes.length);
   // the background-color is modified each time the button is pressed with random RGB values
   document.body.style.backgroundColor = "rgba(" + getRandomRGB() + "," + getRandomRGB() + "," + getRandomRGB()+ ",0.9)";
 }
